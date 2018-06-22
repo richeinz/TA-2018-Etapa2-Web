@@ -6,13 +6,13 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/templates/template.xhtml">
-        <ui:define name="titulo">Sistema com BootsFaces</ui:define>
+        <ui:define name="titulo">TA 2018 ETAPA 2</ui:define>
         <ui:define name="conteudo">
             <h:form>
                 <p:messages/>
                 <p:panelGrid columns="2" columnClasses="ui-grid-col-2, ui-gril-col-5" layout="grid" styleClass="ui-panelgrid-blank">
                     <f:facet name="header">
-                        <p:outputLabel value="Login de Usuáro"/>
+                        <p:outputLabel value="Login de Usador"/>
                     </f:facet>
                     <f:facet name="footer">
                         <div align="center">
@@ -21,8 +21,8 @@
                                              ajax="false"/>
                         </div>
                     </f:facet>
-                    <p:outputLabel value="Usuário" for="txtUsuario"/>
-                    <p:inputText id="txtUsuario" value="#{controleLogin.usuario}"/>
+                    <p:outputLabel value="Usador" for="txtUsador"/>
+                    <p:inputText id="txtUsador" value="#{controleLogin.usador}"/>
                     <p:outputLabel value="Senha" for="txtSenha"/>
                     <p:password id="txtSenha" value="#{controleLogin.senha}"/>
                 </p:panelGrid>

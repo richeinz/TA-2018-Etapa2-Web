@@ -15,24 +15,21 @@
                     <b:navbarLinks>
                         <b:navLink value="Início" outcome="inicio"/>
                         <b:dropMenu value="Cadastros"
-                                    rendered="#{controleLogin.usuarioAutenticado != null}">
-                            <b:navCommandLink value="Setor" ajax="false"
-                                              action="#{controleSetor.listar()}"/>
-                            <b:navCommandLink value="Usuario" ajax="false"
-                                              action="#{controleUsuario.listar()}"
-                                              rendered="#{p:ifGranted('CRUDUSUARIO')}"/>
-                             <b:navCommandLink value="Projeto" ajax="false"
-                                               action="#{controleProjeto.listar()}"/>
+                                    rendered="#{controleLogin.usadorAutenticado != null}">
+                            
+                            <b:navCommandLink value="Usador" ajax="false"
+                                              action="#{controleUsador.listar()}"
+                                              rendered="#{p:ifGranted('ROOT')}"/>
                         </b:dropMenu>
-                        <b:dropMenu value="Usuario #{controleLogin.usuarioAutenticado != null ? controleLogin.usuarioAutenticado.nome : ''}">
+                        <b:dropMenu value="Usador #{controleLogin.usadorAutenticado != null ? controleLogin.usadorAutenticado.name : ''}">
                             <b:navCommandLink value="Efetuar login"
                                               action="#{controleLogin.paginaLogin()}"
                                               ajax="false"
-                                              rendered="#{controleLogin.usuarioAutenticado == null}"/>
+                                              rendered="#{controleLogin.usadorAutenticado == null}"/>
                             <b:navCommandLink value="Efetuar logout"
                                               action="#{controleLogin.efetuarLogout()}"
                                               ajax="false"
-                                              rendered="#{controleLogin.usuarioAutenticado != null}"/>
+                                              rendered="#{controleLogin.usadorAutenticado != null}"/>
                         </b:dropMenu>
                     </b:navbarLinks>
                 </b:navBar>

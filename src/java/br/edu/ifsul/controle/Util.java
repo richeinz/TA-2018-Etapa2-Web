@@ -7,7 +7,7 @@ import javax.faces.view.facelets.FaceletContext;
 
 /**
  *
- * @author Ricardo
+ * @author Ricardo/Joel
  */
 public class Util {
     
@@ -35,7 +35,4 @@ public class Util {
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, mensagem, "");
         contexto.addMessage(null, msg);
     }
-
- 
-    
 }

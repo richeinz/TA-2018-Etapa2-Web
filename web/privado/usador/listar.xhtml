@@ -6,34 +6,32 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/templates/template.xhtml">
-        <ui:define name="titulo">Manutenção de Usuarios</ui:define>
+        <ui:define name="titulo">Manutenção de Usadores</ui:define>
         <ui:define name="conteudo">
             <h:form id="formListagem">
-                <h:panelGroup rendered="#{!controleUsuario.editando}">
+                <h:panelGroup rendered="#{!controleUsador.editando}">
                     <p:messages/>
                     <p:commandButton value="Novo"
                                      icon="ui-icon-plus"
-                                     actionListener="#{controleUsuario.novo()}"
+                                     actionListener="#{controleUsador.novo()}"
                                      update="formEdicao formListagem"/>
-                    <p:dataTable value="#{controleUsuario.dao.listaObjetos}"
+                    <p:dataTable value="#{controleUsador.dao.listaObjetos}"
                                  var="obj" reflow="true" id="listagem">
                         <f:facet name="header">                            
                             <div class="ui-fluid" >
                                 <p:panelGrid columns="7" styleClass="ui-panelgrid-blank" layout="grid"
                                              columnClasses="col-md-1,col-md-2,col-md-1,col-md-3,col-md-2,col-md-2,col-md-1">
                                     <p:outputLabel value="Ordem:" />
-                                    <p:selectOneMenu value="#{controleUsuario.dao.ordem}">  
+                                    <p:selectOneMenu value="#{controleUsador.dao.ordem}">  
                                         <f:selectItem itemLabel="ID" itemValue="id"/>   
-                                        <f:selectItem itemLabel="Nome" itemValue="nome"/>
-                                        <f:selectItem itemLabel="Email" itemValue="email"/>
-                                        <f:selectItem itemLabel="Setor" itemValue="setor.nome"/> 
+                                        <f:selectItem itemLabel="Nome" itemValue="name"/>
                                         <p:ajax update="listagem"/>
                                     </p:selectOneMenu>
                                     <p:outputLabel value="Filtro: "/>
-                                    <p:inputText value="#{controleUsuario.dao.filtro}"/>                                                            
+                                    <p:inputText value="#{controleUsador.dao.filtro}"/>                                                            
                                     <p:commandButton value="Filtrar" update="listagem" icon="ui-icon-search"/>
                                     <p:outputLabel value="Máximo de objetos:"/>
-                                    <p:inputNumber value="#{controleUsuario.dao.maximoObjetos}" size="3"
+                                    <p:inputNumber value="#{controleUsador.dao.maximoObjetos}" size="3"
                                                    thousandSeparator="" decimalSeparator="" decimalPlaces="0">
                                         <p:ajax event="blur" update="listagem"/> 
                                     </p:inputNumber>
@@ -41,36 +39,33 @@
                             </div>                                            
                         </f:facet>
                         <f:facet name="footer"> 
-                            <p:outputLabel value="#{controleUsuario.dao.mensagemNavegacao} &nbsp; &nbsp;"/>
-                            <p:commandButton action="#{controleUsuario.dao.primeiro()}"
+                            <p:outputLabel value="#{controleUsador.dao.mensagemNavegacao} &nbsp; &nbsp;"/>
+                            <p:commandButton action="#{controleUsador.dao.primeiro()}"
                                              icon="ui-icon-seek-first" title="Primeiro" update="listagem"/>
-                            <p:commandButton action="#{controleUsuario.dao.anterior()}"
+                            <p:commandButton action="#{controleUsador.dao.anterior()}"
                                              icon="ui-icon-seek-prev" title="Anterior" update="listagem"/>
-                            <p:commandButton action="#{controleUsuario.dao.proximo()}"
+                            <p:commandButton action="#{controleUsador.dao.proximo()}"
                                              icon="ui-icon-seek-next" title="Próximo" update="listagem"/>
-                            <p:commandButton action="#{controleUsuario.dao.ultimo()}"
+                            <p:commandButton action="#{controleUsador.dao.ultimo()}"
                                              icon="ui-icon-seek-end" title="Ultimo" update="listagem"/>                                                        
                         </f:facet>	                         
                         <p:column headerText="ID">
                             <p:outputLabel value="#{obj.id}"/>
                         </p:column>
                         <p:column headerText="Nome">
-                            <p:outputLabel value="#{obj.nome}"/>
+                            <p:outputLabel value="#{obj.name}"/>
                         </p:column>
                         <p:column headerText="Email">
                             <p:outputLabel value="#{obj.email}"/>
                         </p:column>
-                        <p:column headerText="Setor">
-                            <p:outputLabel value="#{obj.setor.nome}"/>
-                        </p:column>
                         <p:column headerText="Ações">
                             <div align="center">
                                 <p:commandButton icon="ui-icon-pencil" 
-                                                 actionListener="#{controleUsuario.alterar(obj.id)}"
+                                                 actionListener="#{controleUsador.alterar(obj.id)}"
                                                  process="@this"
                                                  update="formListagem :formEdicao"/>
                                 <p:commandButton icon="ui-icon-trash"
-                                                 actionListener="#{controleUsuario.excluir(obj.id)}"
+                                                 actionListener="#{controleUsador.excluir(obj.id)}"
                                                  process="@this"
                                                  update="formListagem"/>
                             </div>

@@ -5,12 +5,7 @@ import br.edu.ifsul.modelo.Carro;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
-import sun.misc.IOUtils;
 
 /**
  *
