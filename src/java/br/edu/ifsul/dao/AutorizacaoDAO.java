@@ -15,7 +15,7 @@ public class AutorizacaoDAO<TIPO> extends DAOGenerico<Autorizacao> implements Se
     public AutorizacaoDAO(){
         super();
         classePersistente = Autorizacao.class;
-        ordem = "nome";
+        ordem = "name";
         maximoObjetos = 3;
     }
 }

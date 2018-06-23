@@ -15,7 +15,7 @@ public class DAOGenerico<TIPO> implements Serializable{
     
     private List<TIPO> listaObjetos;
     private List<TIPO> listaTodos;
-    @PersistenceContext(unitName = "TA-2018-1-6N1-WebPU")
+    @PersistenceContext(unitName = "TA-2018-Etapa2-WebPU")
     protected EntityManager em;
     protected Class classePersistente;
     protected String mensagem = "";
@@ -71,7 +71,7 @@ public class DAOGenerico<TIPO> implements Serializable{
         return (TIPO) em.find(classePersistente, id);
     }
     
-    @RolesAllowed("ADMINISTRADOR")
+    @RolesAllowed("ROOT")
     public void remover(TIPO obj) throws Exception {
         obj = em.merge(obj);
         em.remove(obj);

@@ -16,7 +16,7 @@ public class UsadorDAO<TIPO> extends DAOGenerico<Usador> implements Serializable
     public UsadorDAO(){
         super();
         classePersistente = Usador.class;
-        ordem = "nome";
+        ordem = "name";
         maximoObjetos = 3;
     }
     
@@ -30,9 +30,9 @@ public class UsadorDAO<TIPO> extends DAOGenerico<Usador> implements Serializable
         return obj;
     }
     
-    public Usador localizaPorNomeUsador(String nomeUsador){
-        Query query = em.createQuery("from Usador where upper(usador) = :nomeUsador");
-        query.setParameter("nomeUsador", nomeUsador.toUpperCase());
+    public Usador localizaPorNameUsador(String nameUsador){
+        Query query = em.createQuery("from Usador where upper(usador) = :nameUsador");
+        query.setParameter("nameUsador", nameUsador.toUpperCase());
         Usador obj = (Usador) query.getSingleResult();
         obj.getAutorizacoes().size();
         return obj;

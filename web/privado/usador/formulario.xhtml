@@ -9,7 +9,7 @@
             <div class="ui-fluid">
                 <p:messages id="messages"/>
                 <p:panelGrid columns="2" columnClasses="ui-grid-col-2, ui-grid-col-20"
-                             layout="grid" styleClass="ui-panelgrid-blank">
+                             layout="grid" styleClass="ui-panelgrid-blank" >
                     <f:facet name="header">
                         <p:outputLabel value="Edição de Usadores"/>
                     </f:facet>
@@ -19,16 +19,12 @@
                     <p:outputLabel value="Nome" for="txtNome"/>
                     <p:inputText value="#{controleUsador.objeto.name}"
                                  id="txtNome" size="50" maxlength="50"/>
-                    <p:outputLabel value="Email" for="txtEmail"/>
-                    <p:inputText value="#{controleUsador.objeto.email}"
-                                 id="txtEmail" size="50" maxlength="50"/>
                     <p:outputLabel value="Nome de Usador" for="txtUsador"/>
                     <p:inputText value="#{controleUsador.objeto.usador}"
                                  id="txtUsador" size="20" maxlength="20"/>
                     <p:outputLabel value="Senha de Usador" for="txtSenha"/>
                     <p:password value="#{controleUsador.objeto.password}" redisplay="true"
                                 id="txtSenha" size="20" maxlength="20"/>
-                    <p:outputLabel value="Data Nascimento" for="txtNascimento"/>
                     <p:commandButton value="Salvar"
                                      icon="ui-icon-disk"
                                      actionListener="#{controleUsador.salvar()}"
