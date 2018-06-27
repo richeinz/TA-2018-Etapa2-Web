@@ -1,8 +1,6 @@
 package br.edu.ifsul.controle;
 
-import br.edu.ifsul.dao.CarroDAO;
 import br.edu.ifsul.dao.MarcaDAO;
-import br.edu.ifsul.modelo.Carro;
 import br.edu.ifsul.modelo.Marca;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -13,34 +11,28 @@ import javax.inject.Named;
  *
  * @author Ricardo/Joel
  */
-@Named(value = "controleCarro")
+@Named(value = "controleMarca")
 @ViewScoped
-public class ControleCarro implements Serializable {
+public class ControleMarca implements Serializable {
 
     @EJB
-    private CarroDAO<Carro> dao;
-    private Carro objeto;
+    private MarcaDAO<Marca> dao;
+    private Marca objeto;
     private Boolean editando;
-    @EJB
-    private MarcaDAO daoMarca;
 
-    public ControleCarro() {
+    public ControleMarca() {
         editando = false;
     }
     
-    public String listarPublico() {
-        editando = false;
-        return "/index/listar?faces-redirect=true";
-    }
 
     public String listar() {
         editando = false;
-        return "/privado/carro/listar?faces-redirect=true";
+        return "/privado/marca/listar?faces-redirect=true";
     }
 
     public void novo() {
         editando = true;
-        objeto = new Carro();
+        objeto = new Marca();
     }
 
     public void alterar(Object id) {
@@ -75,45 +67,21 @@ public class ControleCarro implements Serializable {
             Util.mensagemErro("Erro ao persistir objeto " + Util.getMensagemErro(e));
         }
     }
-    
-    /*
-    public void enviarImagem(FileUploadEvent event) {
-        try {
-            byte[] imagem = IOUtils.toByteArray(event.getFile().getInputstream());
-            objeto.setImagens(imagem);
-            Util.mensagemInformacao("Arquivo enviado com sucesso! "
-                    + event.getFile().getFileName());
-        } catch (Exception e) {
-            Util.mensagemErro("Erro ao enviar arquivo:"
-                    + Util.getMensagemErro(e));
-        }
-    }
+   
 
-    public StreamedContent getImagemDinamica() {
-        String strid = FacesContext.getCurrentInstance().getExternalContext()
-                .getRequestParameterMap().get("id_imagem");
-        if (strid != null) {
-            Integer id = Integer.parseInt(strid);
-            Carro obj = dao.localizar(id);
-            return obj.getImagens();
-        }
-        return new DefaultStreamedContent();
-    }
-    */
-
-    public CarroDAO<Carro> getDao() {
+    public MarcaDAO<Marca> getDao() {
         return dao;
     }
 
-    public void setDao(CarroDAO<Carro> dao) {
+    public void setDao(MarcaDAO<Marca> dao) {
         this.dao = dao;
     }
 
-    public Carro getObjeto() {
+    public Marca getObjeto() {
         return objeto;
     }
 
-    public void setObjeto(Carro objeto) {
+    public void setObjeto(Marca objeto) {
         this.objeto = objeto;
     }
 
@@ -124,14 +92,5 @@ public class ControleCarro implements Serializable {
     public void setEditando(Boolean editando) {
         this.editando = editando;
     }
-
-    public MarcaDAO getDaoMarca() {
-        return daoMarca;
-    }
-
-    public void setDaoMarca(MarcaDAO daoMarca) {
-        this.daoMarca = daoMarca;
-    }
-
 
 }

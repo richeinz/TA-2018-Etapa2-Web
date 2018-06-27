@@ -6,11 +6,15 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/templates/template.xhtml">
-        <ui:define name="titulo">Vitrine de Carros</ui:define>
+        <ui:define name="titulo">Manutenção de Carros</ui:define>
         <ui:define name="conteudo">
-             <h:form id="formListagem">
+            <h:form id="formListagem">
                 <h:panelGroup rendered="#{!controleCarro.editando}">
-                    
+                    <p:messages/>
+                    <p:commandButton value="Novo"
+                                     icon="ui-icon-plus"
+                                     actionListener="#{controleCarro.novo()}"
+                                     update="formEdicao formListagem"/>
                     <p:dataTable value="#{controleCarro.dao.listaObjetos}"
                                  var="obj" reflow="true" id="listagem">
                         <f:facet name="header">                            
@@ -76,10 +80,22 @@
                                 <f:convertNumber pattern="R$ 0.00"/>
                             </p:outputLabel>
                         </p:column>
+                        <p:column headerText="Ações">
+                            <div align="center">
+                                <p:commandButton icon="ui-icon-pencil" 
+                                                 actionListener="#{controleCarro.alterar(obj.id)}"
+                                                 process="@this"
+                                                 update="formListagem :formEdicao"/>
+                                <p:commandButton icon="ui-icon-trash"
+                                                 actionListener="#{controleCarro.excluir(obj.id)}"
+                                                 process="@this"
+                                                 update="formListagem"/>
+                            </div>
+                        </p:column>
                     </p:dataTable>
                 </h:panelGroup>
             </h:form>
+            <ui:include src="formulario.xhtml"/>
         </ui:define>
-    </ui:composition>      
+    </ui:composition>
 </html>
-

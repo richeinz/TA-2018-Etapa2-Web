@@ -16,12 +16,15 @@
                         <b:navLink value="Início" outcome="inicio"/>
                         <b:dropMenu value="Cadastros"
                                     rendered="#{controleLogin.usadorAutenticado != null}">
-                            
+
                             <b:navCommandLink value="Usador" ajax="false"
-                                              action="#{controleUsador.listar()}"
-                                              rendered="#{p:ifGranted('ROOT')}"/>
+                                              action="#{controleUsador.listar()}"/>
+                            <b:navCommandLink value="Carro" ajax="false"
+                                              action="#{controleCarro.listar()}"/>
+                            <b:navCommandLink value="Marca" ajax="false"
+                                              action="#{controleMarca.listar()}"/>
                         </b:dropMenu>
-                        <b:dropMenu value="Usador #{controleLogin.usadorAutenticado != null ? controleLogin.usadorAutenticado.name : ''}">
+                        <b:dropMenu value="Usuario:  #{controleLogin.usadorAutenticado != null ? controleLogin.usadorAutenticado.name : ''}">
                             <b:navCommandLink value="Efetuar login"
                                               action="#{controleLogin.paginaLogin()}"
                                               ajax="false"
@@ -37,7 +40,11 @@
             <ui:insert name="conteudo">
                 aqui vai o conteudo das páginas
             </ui:insert>
-            <b:navBar brand-align="center" brand="Desenvolvedores: Ricardo Vicente Heinz e Joel Zatti"/>
+            <br/>
+            <hr/>
+            <footer >
+                <p>© Desenvolvedores: Ricardo Vicente Heinz e Joel Zatti - 2018</p>
+            </footer>
         </b:container>
     </h:body>
 </html>

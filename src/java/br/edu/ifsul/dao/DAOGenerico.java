@@ -71,7 +71,7 @@ public class DAOGenerico<TIPO> implements Serializable{
         return (TIPO) em.find(classePersistente, id);
     }
     
-    @RolesAllowed("ROOT")
+    //@RolesAllowed("ROOT")
     public void remover(TIPO obj) throws Exception {
         obj = em.merge(obj);
         em.remove(obj);

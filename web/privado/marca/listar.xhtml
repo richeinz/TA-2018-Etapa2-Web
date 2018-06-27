@@ -6,31 +6,32 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/templates/template.xhtml">
-        <ui:define name="titulo">Vitrine de Carros</ui:define>
+        <ui:define name="titulo">Manutenção de Marcas</ui:define>
         <ui:define name="conteudo">
-             <h:form id="formListagem">
-                <h:panelGroup rendered="#{!controleCarro.editando}">
-                    
-                    <p:dataTable value="#{controleCarro.dao.listaObjetos}"
+            <h:form id="formListagem">
+                <h:panelGroup rendered="#{!controleMarca.editando}">
+                    <p:messages/>
+                    <p:commandButton value="Novo"
+                                     icon="ui-icon-plus"
+                                     actionListener="#{controleMarca.novo()}"
+                                     update="formEdicao formListagem"/>
+                    <p:dataTable value="#{controleMarca.dao.listaObjetos}"
                                  var="obj" reflow="true" id="listagem">
                         <f:facet name="header">                            
                             <div class="ui-fluid" >
                                 <p:panelGrid columns="7" styleClass="ui-panelgrid-blank" layout="grid"
                                              columnClasses="col-md-1,col-md-2,col-md-1,col-md-3,col-md-2,col-md-2,col-md-1">
                                     <p:outputLabel value="Ordem:" />
-                                    <p:selectOneMenu value="#{controleCarro.dao.ordem}">  
+                                    <p:selectOneMenu value="#{controleMarca.dao.ordem}">  
                                         <f:selectItem itemLabel="ID" itemValue="id"/>   
-                                        <f:selectItem itemLabel="Modelo" itemValue="modelo"/>
-                                        <f:selectItem itemLabel="Marca" itemValue="marca"/>
-                                        <f:selectItem itemLabel="Ano" itemValue="ano"/>
-                                        <f:selectItem itemLabel="Cor" itemValue="cor"/>
+                                        <f:selectItem itemLabel="Nome" itemValue="name"/>
                                         <p:ajax update="listagem"/>
                                     </p:selectOneMenu>
                                     <p:outputLabel value="Filtro: "/>
-                                    <p:inputText value="#{controleCarro.dao.filtro}"/>                                                            
+                                    <p:inputText value="#{controleMarca.dao.filtro}"/>                                                            
                                     <p:commandButton value="Filtrar" update="listagem" icon="ui-icon-search"/>
                                     <p:outputLabel value="Máximo de objetos:"/>
-                                    <p:inputNumber value="#{controleCarro.dao.maximoObjetos}" size="3"
+                                    <p:inputNumber value="#{controleMarca.dao.maximoObjetos}" size="3"
                                                    thousandSeparator="" decimalSeparator="" decimalPlaces="0">
                                         <p:ajax event="blur" update="listagem"/> 
                                     </p:inputNumber>
@@ -38,48 +39,38 @@
                             </div>                                            
                         </f:facet>
                         <f:facet name="footer"> 
-                            <p:outputLabel value="#{controleCarro.dao.mensagemNavegacao} &nbsp; &nbsp;"/>
-                            <p:commandButton action="#{controleCarro.dao.primeiro()}"
+                            <p:outputLabel value="#{controleMarca.dao.mensagemNavegacao} &nbsp; &nbsp;"/>
+                            <p:commandButton action="#{controleMarca.dao.primeiro()}"
                                              icon="ui-icon-seek-first" title="Primeiro" update="listagem"/>
-                            <p:commandButton action="#{controleCarro.dao.anterior()}"
+                            <p:commandButton action="#{controleMarca.dao.anterior()}"
                                              icon="ui-icon-seek-prev" title="Anterior" update="listagem"/>
-                            <p:commandButton action="#{controleCarro.dao.proximo()}"
+                            <p:commandButton action="#{controleMarca.dao.proximo()}"
                                              icon="ui-icon-seek-next" title="Próximo" update="listagem"/>
-                            <p:commandButton action="#{controleCarro.dao.ultimo()}"
+                            <p:commandButton action="#{controleMarca.dao.ultimo()}"
                                              icon="ui-icon-seek-end" title="Ultimo" update="listagem"/>                                                        
                         </f:facet>	                         
                         <p:column headerText="ID">
                             <p:outputLabel value="#{obj.id}"/>
                         </p:column>
-                        <p:column headerText="Modelo">
-                            <p:outputLabel value="#{obj.modelo}"/>
+                        <p:column headerText="Nome">
+                            <p:outputLabel value="#{obj.nome}"/>
                         </p:column>
-                        <p:column headerText="Ano">
-                            <p:outputLabel value="#{obj.ano}"/>
-                        </p:column>
-                        <p:column headerText="Marca">
-                            <p:outputLabel value="#{obj.marca.nome}"/>
-                        </p:column>
-                        <p:column headerText="Cor">
-                            <p:outputLabel value="#{obj.cor}"/>
-                        </p:column>
-                        <p:column headerText="Potencia">
-                            <p:outputLabel value="#{obj.potencia}">
-                                <f:convertNumber pattern="0.0"/>
-                            </p:outputLabel>
-                        </p:column>
-                        <p:column headerText="Placa">
-                            <p:outputLabel value="#{obj.placa}"/>
-                        </p:column>
-                        <p:column headerText="Preço">
-                            <p:outputLabel value="#{obj.preco}">
-                                <f:convertNumber pattern="R$ 0.00"/>
-                            </p:outputLabel>
+                        <p:column headerText="Ações">
+                            <div align="center">
+                                <p:commandButton icon="ui-icon-pencil" 
+                                                 actionListener="#{controleMarca.alterar(obj.id)}"
+                                                 process="@this"
+                                                 update="formListagem :formEdicao"/>
+                                <p:commandButton icon="ui-icon-trash"
+                                                 actionListener="#{controleMarca.excluir(obj.id)}"
+                                                 process="@this"
+                                                 update="formListagem"/>
+                            </div>
                         </p:column>
                     </p:dataTable>
                 </h:panelGroup>
             </h:form>
+            <ui:include src="formulario.xhtml"/>
         </ui:define>
-    </ui:composition>      
+    </ui:composition>
 </html>
-
