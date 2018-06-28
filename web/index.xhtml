@@ -76,6 +76,13 @@
                                 <f:convertNumber pattern="R$ 0.00"/>
                             </p:outputLabel>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">Imagem</f:facet>
+                            <p:graphicImage value="#{controleCarro.imagemDinamica}"
+                                            style="width:60px;height:60px" cache="false">
+                                <f:param name="id_imagem" value="#{obj.id}"/>
+                            </p:graphicImage>
+                        </p:column>
                     </p:dataTable>
                 </h:panelGroup>
             </h:form>

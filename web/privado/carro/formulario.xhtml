@@ -56,13 +56,65 @@
                     <p:inputText value="#{controleCarro.objeto.placa}"
                                  id="txtPlaca" maxlength="7"
                                  placeholder="Obrigatório"/>
+                   
 
                     <p:commandButton value="Salvar"
                                      icon="ui-icon-disk"
                                      actionListener="#{controleCarro.salvar()}"
                                      update="formEdicao :formListagem"/>
                 </p:panelGrid>
+                
+                <h:panelGroup id="painelImagem">
+                    <p:panelGrid columns="2" columnClasses="ui-grid-col-2, ui-grid-col-20"
+                                 layout="grid" styleClass="ui-panelgrid-blank"
+                                 rendered="#{controleCarro.editandoImagem}">
+                        <f:facet name="header">
+                            <p:outputLabel value="Edição de Imagem"/>
+                        </f:facet>
+                        <p:fileUpload id="uploadImagem" mode="advanced"
+                                      update="messages" auto="true" label="Selecionar Imagem"
+                                      fileUploadListener="#{controleCarro.enviarImagem}"
+                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                        <p:outputLabel value=""/>
+                        <p:commandButton value="Salvar Imagem" icon="ui-icon-disk"
+                                         actionListener="#{controleCarro.salvarImagem()}"
+                                         id="btnAdicionarImagem"
+                                         process="btnAdicionarImagem"
+                                         update="messages painelImagem listagemImagem"/>
+                    </p:panelGrid>
+                </h:panelGroup>
             </div> 
+            
+            <h:panelGroup id="listagemImagem">
+                <h:panelGroup rendered="#{!controleCarro.editandoImagem}">
+                    <p:commandButton value="Nova Imagem"
+                                     actionListener="#{controleCarro.novaImagem()}"
+                                     update="listagemImagem painelImagem"
+                                     process="@this"/>
+                    <p:dataTable value="#{controleCarro.objeto.imagens}" var="img"
+                                 reflow="true">
+                        <f:facet name="header">
+                            <p:outputLabel value="Imagens"/>
+                        </f:facet>
+                        <p:column headerText="Id">
+                            <p:outputLabel value="#{img.id}"/>
+                        </p:column>
+                        <p:column headerText="Imagem">
+                            <p:graphicImage value="#{controleCarro.imagemDinamica}" style="width: 70px;height: 70px" cache="false">
+                                <f:param name="id_imagem" value="#{img.carro.id}"/>
+                            </p:graphicImage>
+                        </p:column>
+                        <p:column headerText="Ações">
+                            <div align="center">
+                                <p:commandButton icon="ui-icon-trash"
+                                                 actionListener="#{controleCarro.removerImagem(img)}"
+                                                 process="@this" update="@form"/>
+                            </div>
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+            </h:panelGroup>
+            
         </h:panelGroup>
     </h:form>
 </html>

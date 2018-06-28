@@ -19,12 +19,12 @@ public class CarroDAO<TIPO> extends DAOGenerico<Carro> implements Serializable{
         ordem = "id";
         maximoObjetos = 3;
     }
-    /*
+    
     public Carro localizaPorIdCarro(Integer id){
         Query query = em.createQuery("from Carro where id = :id");
         query.setParameter("id", id);
         Carro obj = (Carro) query.getSingleResult();
         obj.getImagens().size();
         return obj;
-    }*/
+    }
 }
