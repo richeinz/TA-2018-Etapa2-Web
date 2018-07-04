@@ -61,12 +61,7 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    <!-- configuração de log-in basico -->
-    <!--login-config>
-    <auth-method>BASIC</auth-method>
-    <realm-name>TA-2018-1-6N1-Realm</realm-name>
-    </login-config-->
-    <!-- configuração do login com formularios do JSF -->
+    
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>TA-2018-Etapa2-Realm</realm-name>
